@@ -24,3 +24,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "DailyPlanner"
 include(":app")
+include(":core:ui")
+include(":core:common")
+include(":core:database")
+include(":core:network")
+include(":core:navigation")
