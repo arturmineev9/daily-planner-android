@@ -1,26 +1,23 @@
 plugins {
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "ru.arturmineev9.dailyplanner"
+    namespace = "ru.arturmineev9.dailyplanner.core.umbrella"
     compileSdk {
         version = release(libs.versions.compileSdk.get().toInt())
     }
 
     defaultConfig {
-        applicationId = "ru.arturmineev9.dailyplanner"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = rootProject.extra.get("versionCode") as Int
-        versionName = rootProject.extra.get("versionName") as String
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -36,35 +33,30 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
     kotlinOptions {
         jvmTarget = "11"
     }
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    implementation(project(":core:navigation"))
-    implementation(project(":core:network"))
-    implementation(project(":core:ui"))
-
     implementation(project(":feature:planner:api"))
     implementation(project(":feature:planner:impl"))
+
+    implementation(project(":core:ui"))
+    implementation(project(":core:database"))
+    implementation(project(":core:common"))
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
 
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
     detektPlugins(libs.detekt.formatting)
     detektPlugins(libs.detekt.compose)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
 }
