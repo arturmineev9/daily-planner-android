@@ -14,14 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.HourSlot
 
 @Composable
 fun HourCell(
+    modifier: Modifier = Modifier,
     hourSlot: HourSlot,
     onTaskClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    isCurrentHour: Boolean = false,
 ) {
     Row(
         modifier = modifier
@@ -31,6 +33,7 @@ fun HourCell(
         Text(
             text = hourSlot.timeLabel,
             style = MaterialTheme.typography.labelMedium,
+            fontWeight = if (isCurrentHour) FontWeight.ExtraBold else FontWeight.Normal,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.width(90.dp)
         )

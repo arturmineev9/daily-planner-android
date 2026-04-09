@@ -27,14 +27,6 @@ fun PlannerScreen(
     var isDatePickerVisible by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Ежедневник") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
-            )
-        },
         floatingActionButton = { }
     ) { paddingValues ->
         Column(
@@ -70,6 +62,7 @@ fun PlannerScreen(
                 }
             } else {
                 DailyTimeline(
+                    selectedDate = state.selectedDate,
                     hourSlots = state.hourSlots,
                     onTaskClick = { onEvent(PlannerEvent.OnTaskClicked(it)) },
                     modifier = Modifier.fillMaxSize()

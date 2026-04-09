@@ -14,14 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.TaskUiModel
 
 @Composable
 fun TaskCard(
-    task: Task,
+    task: TaskUiModel,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -46,18 +43,10 @@ fun TaskCard(
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = formatTimeRange(task.dateStart, task.dateFinish),
+                text = task.timeRange,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
             )
         }
     }
-}
-
-private fun formatTimeRange(startMillis: Long, endMillis: Long): String {
-    val formatter = DateTimeFormatter.ofPattern("HH:mm")
-    val zone = ZoneId.systemDefault()
-    val start = Instant.ofEpochMilli(startMillis).atZone(zone).format(formatter)
-    val end = Instant.ofEpochMilli(endMillis).atZone(zone).format(formatter)
-    return "$start - $end"
 }
