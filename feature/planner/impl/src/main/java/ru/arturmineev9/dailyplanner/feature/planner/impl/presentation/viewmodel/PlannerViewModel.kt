@@ -1,13 +1,15 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import ru.arturmineev9.dailyplanner.core.common.result.AppResult
 import ru.arturmineev9.dailyplanner.core.ui.mvi.BaseViewModel
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerEffect
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerEvent
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerState
