@@ -1,4 +1,4 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.TaskUiModel
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.TaskUiModel
 
 @Composable
 fun TaskCard(

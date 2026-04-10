@@ -1,10 +1,9 @@
-package ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi
+package ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi
 
 import ru.arturmineev9.dailyplanner.core.ui.mvi.UiEffect
 import ru.arturmineev9.dailyplanner.core.ui.mvi.UiEvent
 import ru.arturmineev9.dailyplanner.core.ui.mvi.UiState
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.HourSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.HourSlot
 
 data class PlannerState(
     val isLoading: Boolean = false,

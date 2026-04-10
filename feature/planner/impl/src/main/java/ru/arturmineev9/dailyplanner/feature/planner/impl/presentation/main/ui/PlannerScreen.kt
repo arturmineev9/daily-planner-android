@@ -1,4 +1,4 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -12,11 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerEvent
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerState
-import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components.DailyTimeline
-import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components.PlannerDatePicker
-import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components.formatSelectedDate
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerEvent
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerState
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.DailyTimeline
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.PlannerDatePicker
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.formatSelectedDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

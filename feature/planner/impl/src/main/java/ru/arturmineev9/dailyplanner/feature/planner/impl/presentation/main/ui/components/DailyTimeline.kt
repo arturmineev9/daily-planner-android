@@ -1,14 +1,13 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import ru.arturmineev9.dailyplanner.core.common.datetime.DateTimeUtils
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.HourSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.HourSlot
 import java.time.LocalTime
 
 @Composable

@@ -1,4 +1,4 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.HourSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.HourSlot
 
 @Composable
 fun HourCell(
