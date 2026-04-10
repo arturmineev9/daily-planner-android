@@ -45,14 +45,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    implementation(project(":core:navigation"))
-    implementation(project(":core:network"))
-    implementation(project(":core:ui"))
-
+    implementation(project(":core:umbrella"))
     implementation(project(":feature:planner:api"))
-    implementation(project(":feature:planner:impl"))
 
+    implementation(libs.androidx.navigation.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)

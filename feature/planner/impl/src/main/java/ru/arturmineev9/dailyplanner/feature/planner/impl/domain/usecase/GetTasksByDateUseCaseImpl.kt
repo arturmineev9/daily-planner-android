@@ -1,0 +1,41 @@
+package ru.arturmineev9.dailyplanner.feature.planner.impl.domain.usecase
+
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.TimeSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.repository.PlannerRepository
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
+import kotlinx.coroutines.flow.map
+import ru.arturmineev9.dailyplanner.core.common.datetime.DateTimeUtils
+import ru.arturmineev9.dailyplanner.core.common.result.AppResult
+import java.time.Instant
+import java.time.ZoneId
+import javax.inject.Inject
+
+class GetTasksByDateUseCaseImpl @Inject constructor(
+    private val repository: PlannerRepository
+) : GetTasksByDateUseCase {
+
+    override fun invoke(timestamp: Long) = repository.getTasksInRange(
+        start = DateTimeUtils.getStartOfDay(timestamp),
+        end = DateTimeUtils.getEndOfDay(timestamp)
+    ).map { result ->
+        when (result) {
+            is AppResult.Success -> AppResult.Success(mapToTimeSlots(timestamp, result.data))
+            is AppResult.Error -> AppResult.Error(result.error, result.message)
+        }
+    }
+
+    private fun mapToTimeSlots(timestamp: Long, tasks: List<ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task>): List<TimeSlot> {
+        val zoneId = ZoneId.systemDefault()
+        val startZoned = Instant.ofEpochMilli(timestamp).atZone(zoneId).toLocalDate().atStartOfDay(zoneId)
+
+        return (0..23).map { hour ->
+            val s = startZoned.plusHours(hour.toLong()).toInstant().toEpochMilli()
+            val e = startZoned.plusHours(hour.toLong() + 1).toInstant().toEpochMilli()
+
+            TimeSlot(
+                hourIndex = hour,
+                tasks = tasks.filter { it.dateStart < e && it.dateFinish > s }
+            )
+        }
+    }
+}
