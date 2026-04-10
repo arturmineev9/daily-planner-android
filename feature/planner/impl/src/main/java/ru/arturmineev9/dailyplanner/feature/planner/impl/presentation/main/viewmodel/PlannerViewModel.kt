@@ -51,7 +51,7 @@ class PlannerViewModel @Inject constructor(
         when (event) {
             is PlannerEvent.OnDateSelected -> dateTrigger.value = event.timestamp
             is PlannerEvent.OnTaskClicked -> setEffect { PlannerEffect.NavigateToDetails(event.taskId) }
-            PlannerEvent.OnAddTaskClicked -> setEffect { PlannerEffect.NavigateToCreateTask }
+            is PlannerEvent.OnAddTaskClicked -> setEffect { PlannerEffect.NavigateToCreateTask }
         }
     }
 }

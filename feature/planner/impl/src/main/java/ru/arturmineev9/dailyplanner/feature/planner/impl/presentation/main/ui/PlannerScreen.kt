@@ -1,6 +1,8 @@
 package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
@@ -27,7 +29,20 @@ fun PlannerScreen(
     var isDatePickerVisible by remember { mutableStateOf(false) }
 
     Scaffold(
-        floatingActionButton = { }
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    onEvent(PlannerEvent.OnAddTaskClicked)
+                },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Добавить задачу"
+                )
+            }
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -70,7 +85,6 @@ fun PlannerScreen(
             }
         }
 
-        // Логика показа диалога
         if (isDatePickerVisible) {
             PlannerDatePicker(
                 selectedDateMillis = state.selectedDate,

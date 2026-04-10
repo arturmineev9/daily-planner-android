@@ -7,7 +7,7 @@ import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.naviga
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.navigation.TaskDetailRoute
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.navigation.CreateTaskRoute
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.PlannerRoute as PlannerRouteScreen
-
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.CreateTaskRoute as CreateTaskRouteScreen
 fun NavGraphBuilder.plannerGraph(navController: NavHostController) {
     composable<PlannerRoute> {
         PlannerRouteScreen(
@@ -24,5 +24,8 @@ fun NavGraphBuilder.plannerGraph(navController: NavHostController) {
     }
 
     composable<CreateTaskRoute> {
+        CreateTaskRouteScreen(
+            navigateBack = { navController.popBackStack() }
+        )
     }
 }
