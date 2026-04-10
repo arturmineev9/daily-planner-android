@@ -1,4 +1,4 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.components
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable

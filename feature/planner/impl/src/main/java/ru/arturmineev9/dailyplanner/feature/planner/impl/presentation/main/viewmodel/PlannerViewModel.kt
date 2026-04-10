@@ -1,4 +1,4 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.viewmodel
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.onEach
 import ru.arturmineev9.dailyplanner.core.common.result.AppResult
 import ru.arturmineev9.dailyplanner.core.ui.mvi.BaseViewModel
 import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerEffect
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerEvent
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerState
-import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.mapper.toUiModel
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerEffect
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerEvent
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerState
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.mapper.toUiModel
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -51,7 +51,7 @@ class PlannerViewModel @Inject constructor(
         when (event) {
             is PlannerEvent.OnDateSelected -> dateTrigger.value = event.timestamp
             is PlannerEvent.OnTaskClicked -> setEffect { PlannerEffect.NavigateToDetails(event.taskId) }
-            PlannerEvent.OnAddTaskClicked -> setEffect { PlannerEffect.NavigateToCreateTask }
+            is PlannerEvent.OnAddTaskClicked -> setEffect { PlannerEffect.NavigateToCreateTask }
         }
     }
 }

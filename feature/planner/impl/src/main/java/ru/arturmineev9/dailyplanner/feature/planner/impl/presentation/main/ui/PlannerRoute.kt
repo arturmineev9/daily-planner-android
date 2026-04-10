@@ -1,12 +1,12 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.mvi.PlannerEffect
-import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.viewmodel.PlannerViewModel
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerEffect
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.viewmodel.PlannerViewModel
 
 @Composable
 fun PlannerRoute(

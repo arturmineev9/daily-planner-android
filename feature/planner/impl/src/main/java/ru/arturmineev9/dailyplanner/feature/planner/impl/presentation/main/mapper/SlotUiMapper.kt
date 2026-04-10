@@ -1,9 +1,9 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.mapper
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.mapper
 
 import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task
 import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.TimeSlot
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.HourSlot
-import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.model.TaskUiModel
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.HourSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.TaskUiModel
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
