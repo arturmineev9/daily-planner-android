@@ -54,10 +54,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.junit)
-    implementation(libs.mockk)
-    implementation(libs.kotlinx.coroutines.test)
-    implementation(libs.turbine)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

@@ -6,7 +6,7 @@ coil = "2.6.0"
 compileSdk = "36"
 composeBom = "2024.09.00"
 coreKtx = "1.18.0"
-coroutinesTest = "1.10.2"
+coroutinesTest = "1.7.3"
 detekt = "1.23.8"
 detektCompose = "0.4.22"
 espressoCore = "3.7.0"
@@ -22,7 +22,7 @@ lifecycleKtx = "2.8.6"
 material = "1.13.0"
 materialIconsExtended = "1.6.0"
 minSdk = "28"
-mockk = "1.14.9"
+mockk = "1.13.8"
 navigationCompose = "2.8.4"
 okhttp = "4.12.0"
 retrofit = "2.11.0"
@@ -70,7 +70,7 @@ retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "re
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-turbine = { group = "app.cash.turbine", name = "turbine", version = "turbine"}
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
