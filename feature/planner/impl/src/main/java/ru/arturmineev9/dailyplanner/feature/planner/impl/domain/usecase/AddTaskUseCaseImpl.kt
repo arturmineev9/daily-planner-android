@@ -17,9 +17,10 @@ class AddTaskUseCaseImpl @Inject constructor(
         val startMins = params.startHour * 60 + params.startMinute
         val endMins = params.endHour * 60 + params.endMinute
         if (endMins <= startMins) {
+            val errorMessage = "Время окончания должно быть позже времени начала"
             return AppResult.Error(
-                IllegalArgumentException(),
-                "Время окончания должно быть позже времени начала"
+                IllegalArgumentException(errorMessage),
+                errorMessage
             )
         }
 

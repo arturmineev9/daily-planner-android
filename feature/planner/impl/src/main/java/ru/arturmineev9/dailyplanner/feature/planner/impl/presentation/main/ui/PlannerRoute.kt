@@ -15,6 +15,7 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.viewm
 fun PlannerRoute(
     navigateToDetails: (Int) -> Unit,
     navigateToCreateTask: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: PlannerViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()

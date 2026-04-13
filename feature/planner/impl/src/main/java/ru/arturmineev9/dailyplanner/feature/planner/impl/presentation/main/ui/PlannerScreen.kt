@@ -8,7 +8,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,23 +27,12 @@ fun PlannerScreen(
     onEvent: (PlannerEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isDatePickerVisible by remember { mutableStateOf(false) }
+    var isDatePickerVisible by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier,
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    onEvent(PlannerEvent.OnAddTaskClicked)
-                },
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Добавить задачу"
-                )
-            }
+            PlannerFab(onClick = { onEvent(PlannerEvent.OnAddTaskClicked) })
         }
     ) { paddingValues ->
         Column(
@@ -51,50 +40,86 @@ fun PlannerScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Surface(
-                onClick = { isDatePickerVisible = true },
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "Выбранный день:",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = formatSelectedDate(state.selectedDate),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
+            PlannerHeader(
+                selectedDate = state.selectedDate,
+                onHeaderClick = { isDatePickerVisible = true }
+            )
 
-            HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
+            HorizontalDivider(
+                thickness = DividerDefaults.Thickness,
+                color = DividerDefaults.color
+            )
 
-            // Отображение списка
-            if (state.isLoading) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                }
-            } else {
-                DailyTimeline(
-                    selectedDate = state.selectedDate,
-                    hourSlots = state.hourSlots,
-                    onTaskClick = { onEvent(PlannerEvent.OnTaskClicked(it)) },
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+            PlannerContent(
+                state = state,
+                onTaskClick = { onEvent(PlannerEvent.OnTaskClicked(it)) }
+            )
         }
 
         if (isDatePickerVisible) {
             PlannerDatePicker(
                 selectedDateMillis = state.selectedDate,
-                onDateSelect = { timestamp ->
-                    onEvent(PlannerEvent.OnDateSelected(timestamp))
-                },
+                onDateSelect = { onEvent(PlannerEvent.OnDateSelected(it)) },
                 onDismiss = { isDatePickerVisible = false }
             )
         }
+    }
+}
+
+@Composable
+private fun PlannerFab(onClick: () -> Unit) {
+    FloatingActionButton(
+        onClick = onClick,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary
+    ) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Добавить задачу"
+        )
+    }
+}
+
+@Composable
+private fun PlannerHeader(
+    selectedDate: Long,
+    onHeaderClick: () -> Unit
+) {
+    Surface(
+        onClick = onHeaderClick,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = "Выбранный день:",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                text = formatSelectedDate(selectedDate),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+private fun PlannerContent(
+    state: PlannerState,
+    onTaskClick: (Int) -> Unit
+) {
+    if (state.isLoading) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+    } else {
+        DailyTimeline(
+            selectedDate = state.selectedDate,
+            hourSlots = state.hourSlots,
+            onTaskClick = onTaskClick,
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }

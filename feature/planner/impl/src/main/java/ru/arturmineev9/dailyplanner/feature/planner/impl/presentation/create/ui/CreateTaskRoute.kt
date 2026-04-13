@@ -1,7 +1,6 @@
 package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,8 +15,9 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.vie
 
 @Composable
 fun CreateTaskRoute(
-    viewModel: CreateTaskViewModel = hiltViewModel(),
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: CreateTaskViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val snackBarHostState = remember { SnackbarHostState() }

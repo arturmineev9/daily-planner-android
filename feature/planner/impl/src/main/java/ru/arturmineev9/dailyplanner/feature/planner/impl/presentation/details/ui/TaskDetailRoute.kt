@@ -13,8 +13,9 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.details.vi
 
 @Composable
 fun TaskDetailRoute(
-    viewModel: TaskDetailViewModel = hiltViewModel(),
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: TaskDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val currentNavigateBack by rememberUpdatedState(navigateBack)
