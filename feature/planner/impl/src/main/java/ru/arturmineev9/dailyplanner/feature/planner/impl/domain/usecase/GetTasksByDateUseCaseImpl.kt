@@ -11,6 +11,10 @@ import java.time.Instant
 import java.time.ZoneId
 import javax.inject.Inject
 
+private const val DAY_START_HOUR = 0
+private const val DAY_END_HOUR = 23
+private const val NEXT_HOUR_OFFSET = 1L
+
 class GetTasksByDateUseCaseImpl @Inject constructor(
     private val repository: PlannerRepository
 ) : GetTasksByDateUseCase {
@@ -29,9 +33,9 @@ class GetTasksByDateUseCaseImpl @Inject constructor(
         val zoneId = ZoneId.systemDefault()
         val startZoned = Instant.ofEpochMilli(timestamp).atZone(zoneId).toLocalDate().atStartOfDay(zoneId)
 
-        return (0..23).map { hour ->
+        return (DAY_START_HOUR..DAY_END_HOUR).map { hour ->
             val s = startZoned.plusHours(hour.toLong()).toInstant().toEpochMilli()
-            val e = startZoned.plusHours(hour.toLong() + 1).toInstant().toEpochMilli()
+            val e = startZoned.plusHours(hour.toLong() + NEXT_HOUR_OFFSET).toInstant().toEpochMilli()
 
             TimeSlot(
                 hourIndex = hour,

@@ -30,6 +30,6 @@ fun TaskDetailRoute(
     TaskDetailScreen(
         state = state,
         onEvent = viewModel::handleEvent,
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     )
 }

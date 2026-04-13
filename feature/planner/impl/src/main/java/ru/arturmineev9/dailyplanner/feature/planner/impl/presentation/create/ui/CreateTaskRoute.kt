@@ -38,6 +38,6 @@ fun CreateTaskRoute(
         state = state,
         snackBarHostState = snackBarHostState,
         onEvent = viewModel::handleEvent,
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     )
 }

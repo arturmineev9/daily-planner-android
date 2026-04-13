@@ -7,12 +7,22 @@ import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
+private const val LAST_HOUR_OF_DAY = 23
+private const val FIRST_HOUR_OF_DAY = 0
+private const val NEXT_HOUR_OFFSET = 1
 private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
 fun TimeSlot.toUiModel(): HourSlot {
-    val startHour = "%02d:00".format(hourIndex)
-    val endHour = "%02d:00".format(if (hourIndex == 23) 0 else hourIndex + 1)
+    val startHour = String.format(Locale.getDefault(), "%02d:00", hourIndex)
+    val nextHourIndex = if (hourIndex == LAST_HOUR_OF_DAY) {
+        FIRST_HOUR_OF_DAY
+    } else {
+        hourIndex + NEXT_HOUR_OFFSET
+    }
+
+    val endHour = String.format(Locale.getDefault(), "%02d:00", nextHourIndex)
 
     return HourSlot(
         timeLabel = "$startHour - $endHour",
