@@ -15,9 +15,9 @@ import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.create.mvi.
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.PickerListItem
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.PlannerTimePicker
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.SaveTaskButton
-import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.TaskInputFields
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.PlannerDatePicker
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.formatSelectedDate
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.create.components.TaskInputFields
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

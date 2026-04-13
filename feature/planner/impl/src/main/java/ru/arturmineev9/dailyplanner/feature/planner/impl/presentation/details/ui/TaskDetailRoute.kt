@@ -1,0 +1,29 @@
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.details.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.details.mvi.TaskDetailEffect
+import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.details.viewmodel.TaskDetailViewModel
+
+@Composable
+fun TaskDetailRoute(
+    viewModel: TaskDetailViewModel = hiltViewModel(),
+    navigateBack: () -> Unit
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
+                TaskDetailEffect.NavigateBack -> navigateBack()
+            }
+        }
+    }
+
+    TaskDetailScreen(state = state, onEvent = viewModel::handleEvent)
+}
