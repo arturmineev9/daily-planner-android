@@ -22,6 +22,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -46,7 +47,7 @@ fun CreateTaskScreen(
     onEvent: (CreateTaskEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var activeDialog by rememberSaveable { mutableStateOf<ActiveDialog>(ActiveDialog.None) }
+    var activeDialog by remember { mutableStateOf<ActiveDialog>(ActiveDialog.None) }
 
     Scaffold(
         modifier = modifier,
