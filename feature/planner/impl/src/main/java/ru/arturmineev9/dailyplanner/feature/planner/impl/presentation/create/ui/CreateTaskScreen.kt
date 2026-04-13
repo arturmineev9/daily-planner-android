@@ -25,9 +25,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.create.mvi.CreateTaskEvent
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.create.mvi.CreateTaskState
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.PickerListItem
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.PlannerTimePicker
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components.SaveTaskButton
@@ -83,7 +85,7 @@ fun CreateTaskScreen(
 @Composable
 private fun CreateTaskTopBar(onBackClick: () -> Unit) {
     TopAppBar(
-        title = { Text("Новая задача") },
+        title = { Text(stringResource(R.string.create_screen_topbar)) },
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Назад")
@@ -117,19 +119,19 @@ private fun CreateTaskContent(
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
         PickerListItem(
-            label = "Дата",
+            label = stringResource(R.string.create_screen_date),
             value = state.selectedDateMillis?.let { formatSelectedDate(it) } ?: "Выбрать",
             onClick = { onOpenDialog(ActiveDialog.Date) }
         )
 
         PickerListItem(
-            label = "Начало",
+            label = stringResource(R.string.create_screen_begin),
             value = String.format(Locale.getDefault(), "%02d:%02d", state.startHour, state.startMinute),
             onClick = { onOpenDialog(ActiveDialog.StartTime) }
         )
 
         PickerListItem(
-            label = "Окончание",
+            label = stringResource(R.string.create_screen_end),
             value = String.format(Locale.getDefault(), "%02d:%02d", state.endHour, state.endMinute),
             onClick = { onOpenDialog(ActiveDialog.EndTime) }
         )

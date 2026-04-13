@@ -24,10 +24,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerEvent
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.mvi.PlannerState
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.DailyTimeline
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.PlannerDatePicker
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components.formatSelectedDate
@@ -87,7 +89,7 @@ private fun PlannerFab(onClick: () -> Unit) {
     ) {
         Icon(
             imageVector = Icons.Default.Add,
-            contentDescription = "Добавить задачу"
+            contentDescription = stringResource(R.string.planner_add_task)
         )
     }
 }
@@ -104,7 +106,7 @@ private fun PlannerHeader(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Выбранный день:",
+                text = stringResource(R.string.planner_selected_day),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

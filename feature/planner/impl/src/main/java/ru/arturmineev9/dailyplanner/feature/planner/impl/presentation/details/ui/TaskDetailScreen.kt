@@ -16,8 +16,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.details.mvi.TaskDetailEvent
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.details.mvi.TaskDetailState
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.details.ui.components.TaskDetailContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +35,7 @@ fun TaskDetailScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text("Детали") },
+                title = { Text(stringResource(R.string.detail_screen_topbar)) },
                 navigationIcon = {
                     IconButton(onClick = { onEvent(TaskDetailEvent.OnBackClicked) }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Назад")
@@ -53,7 +55,7 @@ fun TaskDetailScreen(
                 }
                 state.error != null -> {
                     Text(
-                        text = state.error ?: "Ошибка",
+                        text = state.error ?: stringResource(R.string.error),
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.align(Alignment.Center)
                     )
