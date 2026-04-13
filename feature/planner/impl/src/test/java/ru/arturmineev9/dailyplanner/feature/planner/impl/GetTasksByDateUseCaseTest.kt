@@ -22,7 +22,7 @@ class GetTasksByDateUseCaseTest {
 
     @Test
     fun `when repository returns tasks, usecase should map them to 24 hourly slots`() = runTest {
-        val testDate = LocalDate.of(2023, 10, 25)
+        val testDate = LocalDate.of(2025, 10, 25)
         val timestamp = testDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
         val task = Task(
