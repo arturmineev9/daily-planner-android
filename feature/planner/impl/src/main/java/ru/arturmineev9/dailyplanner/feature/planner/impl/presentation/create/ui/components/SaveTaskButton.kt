@@ -7,7 +7,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 
 @Composable
 fun SaveTaskButton(
@@ -27,7 +29,7 @@ fun SaveTaskButton(
                 color = MaterialTheme.colorScheme.onPrimary
             )
         } else {
-            Text("Сохранить")
+            Text(stringResource(R.string.create_screen_save))
         }
     }
 }

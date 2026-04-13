@@ -1,6 +1,9 @@
 package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.details.ui.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Schedule
@@ -9,9 +12,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.details.model.TaskDetailInfo
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 
 @Composable
 fun TaskDetailContent(
@@ -46,7 +51,7 @@ fun TaskDetailContent(
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
         Text(
-            text = "Описание:",
+            text = stringResource(R.string.detail_screen_desc),
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.primary
         )

@@ -20,9 +20,9 @@ import ru.arturmineev9.dailyplanner.feature.planner.api.presentation.main.model.
 
 @Composable
 fun HourCell(
-    modifier: Modifier = Modifier,
     hourSlot: HourSlot,
     onTaskClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     isCurrentHour: Boolean = false,
 ) {
     Row(

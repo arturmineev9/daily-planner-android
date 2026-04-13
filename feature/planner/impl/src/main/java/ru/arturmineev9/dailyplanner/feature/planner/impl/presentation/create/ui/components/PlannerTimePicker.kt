@@ -17,16 +17,18 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlannerTimePicker(
     initialHour: Int,
     initialMinute: Int,
-    onTimeSelected: (hour: Int, minute: Int) -> Unit,
+    onTimeSelect: (hour: Int, minute: Int) -> Unit,
     onDismiss: () -> Unit
 ) {
     val timePickerState = rememberTimePickerState(
@@ -49,7 +51,7 @@ fun PlannerTimePicker(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Выберите время",
+                    text = stringResource(R.string.planner_pick_time),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.fillMaxWidth()
@@ -66,15 +68,15 @@ fun PlannerTimePicker(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Отмена")
+                        Text(stringResource(R.string.planner_cancel))
                     }
                     TextButton(
                         onClick = {
-                            onTimeSelected(timePickerState.hour, timePickerState.minute)
+                            onTimeSelect(timePickerState.hour, timePickerState.minute)
                             onDismiss()
                         }
                     ) {
-                        Text("ОК")
+                        Text(stringResource(R.string.planner_ok))
                     }
                 }
             }

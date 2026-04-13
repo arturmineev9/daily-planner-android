@@ -1,7 +1,14 @@
 package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.components
 
-import androidx.compose.material3.*
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -10,7 +17,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun PlannerDatePicker(
     selectedDateMillis: Long,
-    onDateSelected: (Long) -> Unit,
+    onDateSelect: (Long) -> Unit,
     onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState(
@@ -21,16 +28,15 @@ fun PlannerDatePicker(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = {
-                // Если дата выбрана, пробрасываем её наверх, иначе оставляем старую
-                onDateSelected(datePickerState.selectedDateMillis ?: selectedDateMillis)
+                onDateSelect(datePickerState.selectedDateMillis ?: selectedDateMillis)
                 onDismiss()
             }) {
-                Text("ОК")
+                Text(stringResource(R.string.ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Отмена")
+                Text(stringResource(R.string.cancel))
             }
         }
     ) {

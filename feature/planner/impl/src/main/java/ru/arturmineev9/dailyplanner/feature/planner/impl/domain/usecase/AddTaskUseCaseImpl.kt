@@ -9,17 +9,20 @@ import java.time.Instant
 import java.time.ZoneId
 import javax.inject.Inject
 
+private const val MINUTES_IN_HOUR = 60
+
 class AddTaskUseCaseImpl @Inject constructor(
     private val repository: PlannerRepository
 ) : AddTaskUseCase {
 
     override suspend fun invoke(params: AddTaskParams): AppResult<Unit> {
-        val startMins = params.startHour * 60 + params.startMinute
-        val endMins = params.endHour * 60 + params.endMinute
+        val startMins = params.startHour * MINUTES_IN_HOUR + params.startMinute
+        val endMins = params.endHour * MINUTES_IN_HOUR + params.endMinute
         if (endMins <= startMins) {
+            val errorMessage = "Время окончания должно быть позже времени начала"
             return AppResult.Error(
-                IllegalArgumentException(),
-                "Время окончания должно быть позже времени начала"
+                IllegalArgumentException(errorMessage),
+                errorMessage
             )
         }
 

@@ -12,7 +12,8 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.data.datasource.Planner
 abstract class DataSourceModule {
 
     @Binds
-    abstract fun bindPlannerDataSource(impl:
+    abstract fun bindPlannerDataSource(
+        impl:
         PlannerLocalDataSourceImpl
     ): PlannerLocalDataSource
 }

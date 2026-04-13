@@ -1,4 +1,4 @@
-package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.create.components
+package ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.create.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 
 private const val TITLE_MAX_LENGTH = 50
 private const val DESC_MAX_LENGTH = 200
@@ -37,7 +39,7 @@ fun TaskInputFields(
                     onTitleChange(newValue)
                 }
             },
-            label = { Text("Название") },
+            label = { Text(stringResource(R.string.create_screen_label)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -46,7 +48,11 @@ fun TaskInputFields(
             ),
             supportingText = {
                 Text(
-                    text = "${title.length} / $TITLE_MAX_LENGTH",
+                    text = stringResource(
+                        R.string.create_screen_max_length_title,
+                        title.length,
+                        TITLE_MAX_LENGTH
+                    ),
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
                     style = MaterialTheme.typography.bodySmall
@@ -61,7 +67,7 @@ fun TaskInputFields(
                     onDescriptionChange(newValue)
                 }
             },
-            label = { Text("Описание (необязательно)") },
+            label = { Text(stringResource(R.string.create_screen_description)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(140.dp),
@@ -71,7 +77,11 @@ fun TaskInputFields(
             ),
             supportingText = {
                 Text(
-                    text = "${description.length} / $DESC_MAX_LENGTH",
+                    text = stringResource(
+                        R.string.create_screen_max_length,
+                        description.length,
+                        DESC_MAX_LENGTH
+                    ),
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
                     style = MaterialTheme.typography.bodySmall

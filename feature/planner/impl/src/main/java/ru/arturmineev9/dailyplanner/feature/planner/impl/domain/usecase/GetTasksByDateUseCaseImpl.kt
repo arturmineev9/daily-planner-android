@@ -1,14 +1,19 @@
 package ru.arturmineev9.dailyplanner.feature.planner.impl.domain.usecase
 
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.TimeSlot
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.repository.PlannerRepository
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
 import kotlinx.coroutines.flow.map
 import ru.arturmineev9.dailyplanner.core.common.datetime.DateTimeUtils
 import ru.arturmineev9.dailyplanner.core.common.result.AppResult
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.TimeSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.repository.PlannerRepository
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
 import java.time.Instant
 import java.time.ZoneId
 import javax.inject.Inject
+
+private const val DAY_START_HOUR = 0
+private const val DAY_END_HOUR = 23
+private const val NEXT_HOUR_OFFSET = 1L
 
 class GetTasksByDateUseCaseImpl @Inject constructor(
     private val repository: PlannerRepository
@@ -24,13 +29,13 @@ class GetTasksByDateUseCaseImpl @Inject constructor(
         }
     }
 
-    private fun mapToTimeSlots(timestamp: Long, tasks: List<ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task>): List<TimeSlot> {
+    private fun mapToTimeSlots(timestamp: Long, tasks: List<Task>): List<TimeSlot> {
         val zoneId = ZoneId.systemDefault()
         val startZoned = Instant.ofEpochMilli(timestamp).atZone(zoneId).toLocalDate().atStartOfDay(zoneId)
 
-        return (0..23).map { hour ->
+        return (DAY_START_HOUR..DAY_END_HOUR).map { hour ->
             val s = startZoned.plusHours(hour.toLong()).toInstant().toEpochMilli()
-            val e = startZoned.plusHours(hour.toLong() + 1).toInstant().toEpochMilli()
+            val e = startZoned.plusHours(hour.toLong() + NEXT_HOUR_OFFSET).toInstant().toEpochMilli()
 
             TimeSlot(
                 hourIndex = hour,
