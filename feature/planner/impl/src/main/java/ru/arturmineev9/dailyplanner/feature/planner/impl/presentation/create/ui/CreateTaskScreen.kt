@@ -24,23 +24,18 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.ui.create.
 fun CreateTaskScreen(
     state: CreateTaskState,
     snackBarHostState: SnackbarHostState,
-    onEvent: (CreateTaskEvent) -> Unit
+    onEvent: (CreateTaskEvent) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var showDatePicker by rememberSaveable { mutableStateOf(false) }
     var showStartTimePicker by rememberSaveable { mutableStateOf(false) }
     var showEndTimePicker by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier,
         snackbarHost = { SnackbarHost(snackBarHostState) },
         topBar = {
-            TopAppBar(
-                title = { Text("Новая задача") },
-                navigationIcon = {
-                    IconButton(onClick = { onEvent(CreateTaskEvent.OnBackClicked) }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Назад")
-                    }
-                }
-            )
+            CreateTaskTopBar(onBackClick = { onEvent(CreateTaskEvent.OnBackClicked) })
         },
         bottomBar = {
             SaveTaskButton(
@@ -51,66 +46,25 @@ fun CreateTaskScreen(
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            TaskInputFields(
-                title = state.title,
-                description = state.description,
-                onTitleChange = { onEvent(CreateTaskEvent.OnTitleChanged(it)) },
-                onDescriptionChange = { onEvent(CreateTaskEvent.OnDescriptionChanged(it)) }
-            )
-
-            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
-            PickerListItem(
-                label = "Дата",
-                value = state.selectedDateMillis?.let { formatSelectedDate(it) } ?: "Выбрать",
-                onClick = { showDatePicker = true }
-            )
-
-            PickerListItem(
-                label = "Начало",
-                value = String.format("%02d:%02d", state.startHour, state.startMinute),
-                onClick = { showStartTimePicker = true }
-            )
-
-            PickerListItem(
-                label = "Окончание",
-                value = String.format("%02d:%02d", state.endHour, state.endMinute),
-                onClick = { showEndTimePicker = true }
-            )
-        }
-    }
-
-    if (showDatePicker) {
-        PlannerDatePicker(
-            selectedDateMillis = state.selectedDateMillis ?: System.currentTimeMillis(),
-            onDateSelected = { onEvent(CreateTaskEvent.OnDateSelected(it)) },
-            onDismiss = { showDatePicker = false }
+        CreateTaskContent(
+            state = state,
+            paddingValues = paddingValues,
+            onEvent = onEvent,
+            onDateClick = { showDatePicker = true },
+            onStartTimeClick = { showStartTimePicker = true },
+            onEndTimeClick = { showEndTimePicker = true }
         )
     }
 
-    if (showStartTimePicker) {
-        PlannerTimePicker(
-            initialHour = state.startHour,
-            initialMinute = state.startMinute,
-            onTimeSelected = { h, m -> onEvent(CreateTaskEvent.OnStartTimeSelected(h, m)) },
-            onDismiss = { showStartTimePicker = false }
-        )
-    }
 
-    if (showEndTimePicker) {
-        PlannerTimePicker(
-            initialHour = state.endHour,
-            initialMinute = state.endMinute,
-            onTimeSelected = { h, m -> onEvent(CreateTaskEvent.OnEndTimeSelected(h, m)) },
-            onDismiss = { showEndTimePicker = false }
-        )
-    }
+    CreateTaskDialogs(
+        state = state,
+        showDatePicker = showDatePicker,
+        showStartTimePicker = showStartTimePicker,
+        showEndTimePicker = showEndTimePicker,
+        onDateDismiss = { showDatePicker = false },
+        onStartTimeDismiss = { showStartTimePicker = false },
+        onEndTimeDismiss = { showEndTimePicker = false },
+        onEvent = onEvent
+    )
 }

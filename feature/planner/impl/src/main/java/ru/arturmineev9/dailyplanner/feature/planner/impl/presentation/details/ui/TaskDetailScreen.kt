@@ -15,11 +15,13 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.details.ui
 @Composable
 fun TaskDetailScreen(
     state: TaskDetailState,
-    onEvent: (TaskDetailEvent) -> Unit
+    onEvent: (TaskDetailEvent) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val taskInfo = state.taskInfo
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = { Text("Детали") },

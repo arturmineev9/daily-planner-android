@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun PlannerDatePicker(
     selectedDateMillis: Long,
-    onDateSelected: (Long) -> Unit,
+    onDateSelect: (Long) -> Unit,
     onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState(
@@ -21,8 +21,7 @@ fun PlannerDatePicker(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = {
-                // Если дата выбрана, пробрасываем её наверх, иначе оставляем старую
-                onDateSelected(datePickerState.selectedDateMillis ?: selectedDateMillis)
+                onDateSelect(datePickerState.selectedDateMillis ?: selectedDateMillis)
                 onDismiss()
             }) {
                 Text("ОК")

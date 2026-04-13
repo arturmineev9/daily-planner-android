@@ -7,6 +7,11 @@ import java.time.ZoneId
 
 object DateTimeUtils {
 
+    private const val MAX_HOUR = 23
+    private const val MAX_MINUTE = 59
+    private const val MAX_SECOND = 59
+    private const val MAX_MILLIS = 999
+
     fun getStartOfDay(timestamp: Long): Long {
         val date = Instant.ofEpochMilli(timestamp)
             .atZone(ZoneId.systemDefault())
@@ -18,8 +23,10 @@ object DateTimeUtils {
         val date = Instant.ofEpochMilli(timestamp)
             .atZone(ZoneId.systemDefault())
             .toLocalDate()
-        return date.atTime(23, 59, 59, 999)
-            .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        return date.atTime(MAX_HOUR, MAX_MINUTE, MAX_SECOND, MAX_MILLIS)
+            .atZone(ZoneId.systemDefault())
+            .toInstant()
+            .toEpochMilli()
     }
 
     fun isToday(timestamp: Long): Boolean {
@@ -30,5 +37,4 @@ object DateTimeUtils {
     }
 
     fun getCurrentHour(): Int = LocalTime.now().hour
-
 }

@@ -26,7 +26,7 @@ import androidx.compose.ui.window.DialogProperties
 fun PlannerTimePicker(
     initialHour: Int,
     initialMinute: Int,
-    onTimeSelected: (hour: Int, minute: Int) -> Unit,
+    onTimeSelect: (hour: Int, minute: Int) -> Unit,
     onDismiss: () -> Unit
 ) {
     val timePickerState = rememberTimePickerState(
@@ -70,7 +70,7 @@ fun PlannerTimePicker(
                     }
                     TextButton(
                         onClick = {
-                            onTimeSelected(timePickerState.hour, timePickerState.minute)
+                            onTimeSelect(timePickerState.hour, timePickerState.minute)
                             onDismiss()
                         }
                     ) {

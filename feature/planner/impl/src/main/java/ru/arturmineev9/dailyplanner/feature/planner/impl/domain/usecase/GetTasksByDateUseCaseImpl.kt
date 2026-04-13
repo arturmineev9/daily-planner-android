@@ -1,11 +1,12 @@
 package ru.arturmineev9.dailyplanner.feature.planner.impl.domain.usecase
 
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.TimeSlot
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.repository.PlannerRepository
-import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
 import kotlinx.coroutines.flow.map
 import ru.arturmineev9.dailyplanner.core.common.datetime.DateTimeUtils
 import ru.arturmineev9.dailyplanner.core.common.result.AppResult
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.TimeSlot
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.repository.PlannerRepository
+import ru.arturmineev9.dailyplanner.feature.planner.api.domain.usecase.GetTasksByDateUseCase
 import java.time.Instant
 import java.time.ZoneId
 import javax.inject.Inject
@@ -24,7 +25,7 @@ class GetTasksByDateUseCaseImpl @Inject constructor(
         }
     }
 
-    private fun mapToTimeSlots(timestamp: Long, tasks: List<ru.arturmineev9.dailyplanner.feature.planner.api.domain.model.Task>): List<TimeSlot> {
+    private fun mapToTimeSlots(timestamp: Long, tasks: List<Task>): List<TimeSlot> {
         val zoneId = ZoneId.systemDefault()
         val startZoned = Instant.ofEpochMilli(timestamp).atZone(zoneId).toLocalDate().atStartOfDay(zoneId)
 

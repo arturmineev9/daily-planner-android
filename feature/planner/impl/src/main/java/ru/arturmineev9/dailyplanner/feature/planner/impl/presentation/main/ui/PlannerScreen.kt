@@ -24,11 +24,13 @@ import ru.arturmineev9.dailyplanner.feature.planner.impl.presentation.main.ui.co
 @Composable
 fun PlannerScreen(
     state: PlannerState,
-    onEvent: (PlannerEvent) -> Unit
+    onEvent: (PlannerEvent) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var isDatePickerVisible by remember { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier,
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -88,7 +90,7 @@ fun PlannerScreen(
         if (isDatePickerVisible) {
             PlannerDatePicker(
                 selectedDateMillis = state.selectedDate,
-                onDateSelected = { timestamp ->
+                onDateSelect = { timestamp ->
                     onEvent(PlannerEvent.OnDateSelected(timestamp))
                 },
                 onDismiss = { isDatePickerVisible = false }

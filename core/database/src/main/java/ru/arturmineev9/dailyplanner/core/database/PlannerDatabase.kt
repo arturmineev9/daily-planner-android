@@ -3,7 +3,6 @@ package ru.arturmineev9.dailyplanner.core.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import ru.arturmineev9.dailyplanner.core.database.dao.TaskDao
-
 import ru.arturmineev9.dailyplanner.core.database.entity.TaskEntity
 
 @Database(
