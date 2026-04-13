@@ -7,6 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import ru.arturmineev9.dailyplanner.feature.planner.impl.R
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -29,12 +31,12 @@ fun PlannerDatePicker(
                 onDateSelect(datePickerState.selectedDateMillis ?: selectedDateMillis)
                 onDismiss()
             }) {
-                Text("ОК")
+                Text(stringResource(R.string.ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Отмена")
+                Text(stringResource(R.string.cancel))
             }
         }
     ) {
